@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../Pages/HomePage.dart';
 import '../Pages/ExplorePage.dart';
 import '../Pages/PastTripsPage.dart';
+import '../Pages/New_Trip/Location.dart';
+import 'package:BudgetEnTour/Models/Trip.dart';
 
 class BottomNav extends StatefulWidget {
   @override
@@ -24,9 +26,23 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
+    // Need to pass a new trip into the New_Pages to be able to get the values from 
+    // The newTrip set up 
+    final newTrip = new Trip(null,null,null,null,null);
     return Scaffold(
       appBar: AppBar(
         title: Text("Travel Budget App"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context , 
+                MaterialPageRoute(builder: (context) => NewTripLocation(trip:newTrip)),
+              );
+            },
+          ),
+        ]
       ),
       body: _tabPages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
